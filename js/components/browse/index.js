@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { TouchableOpacity } from "react-native";
+﻿import React, { Component } from "react";
+import { TouchableOpacity, Image } from "react-native";
 import { connect } from "react-redux";
 import BlankPage2 from "../blankPage2";
 import DrawBar from "../DrawBar";
@@ -16,7 +16,7 @@ import {
   Body,
   Right
 } from "native-base";
-import { Grid, Row } from "react-native-easy-grid";
+import { Grid, Row, Col } from "react-native-easy-grid";
 
 import { setIndex } from "../../actions/list";
 import { openDrawer } from "../../actions/drawer";
@@ -28,7 +28,7 @@ class Browse extends Component {
   };
   static propTypes = {
     setIndex: React.PropTypes.func,
-    list: React.PropTypes.arrayOf(React.PropTypes.string),
+    list: React.PropTypes.arrayOf(React.PropTypes.number),
     openDrawer: React.PropTypes.func
   };
 
@@ -59,20 +59,48 @@ class Browse extends Component {
           </Right>
         </Header>
         <Content>
+          <Button style={styles.searchAll} warning block>
+            <Text>SEARCH ALL</Text>
+          </Button>
           <Grid style={styles.mt}>
-            {this.props.list.map((item, i) => (
-              <Row key={i}>
-                <TouchableOpacity
-                  style={styles.row}
-                  onPress={() =>
-                    this.props.navigation.navigate("BlankPage", {
-                      name: { item }
-                    })}
-                >
-                  <Text style={styles.text}>{item}</Text>
-                </TouchableOpacity>
-              </Row>
-            ))}
+            <Col>
+              {this.props.list.map((item, i) => {
+                return (i%2 === 0) ?
+                  (
+                    <Row key={i}>
+                      <TouchableOpacity
+                        style={{...styles.row, marginRight: 5}}
+                        onPress={() =>
+                          this.props.navigation.navigate("Search", {
+                            name: { item }
+                          })}
+                      >
+                        <Image source={item} style={styles.image}/>
+                      </TouchableOpacity>
+                    </Row>
+                  )
+                  : null;
+              })}
+            </Col>
+            <Col>
+              {this.props.list.map((item, i) => {
+                return (i%2 === 1) ?
+                  (
+                    <Row key={i}>
+                      <TouchableOpacity
+                        style={styles.row}
+                        onPress={() =>
+                          this.props.navigation.navigate("Search", {
+                            name: { item }
+                          })}
+                      >
+                        <Image source={item} style={styles.image}/>
+                      </TouchableOpacity>
+                    </Row>
+                  )
+                  : null;
+              })}
+            </Col>  
           </Grid>
         </Content>
       </Container>

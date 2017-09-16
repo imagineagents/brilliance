@@ -9,7 +9,24 @@ import {
   Content,
   Icon
 } from "native-base";
-const routes = ["Browse", "BlankPage2"];
+const routes = [
+  {
+    screen: "Browse",
+    title: "Diamond Search"
+  },
+  {
+    screen: "Education",
+    title: "Education"
+  },
+  {
+    screen: "MyAccount",
+    title: "My Account"
+  },
+  {
+    screen: "AboutUs",
+    title: "About Us"
+  }
+];
 export default class DrawBar extends React.Component {
   static navigationOptions = {
     header: null
@@ -53,9 +70,9 @@ export default class DrawBar extends React.Component {
               return (
                 <ListItem
                   button
-                  onPress={() => this.props.navigation.navigate(data)}
+                  onPress={() => this.props.navigation.navigate(data.screen)}
                 >
-                  <Text>{data}</Text>
+                  <Text>{data.title}</Text>
                 </ListItem>
               );
             }}

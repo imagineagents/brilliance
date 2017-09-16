@@ -7,12 +7,10 @@ export type State = {
 
 const initialState = {
   list: [
-    "React Native Starter Kit",
-    "React Navigation",
-    "NativeBase Easy Grid",
-    "NativeBase",
-    "CodePush",
-    "Redux"
+    require("../../images/round.png"),
+    require("../../images/princess.png"),
+    require("../../images/pear.png"),
+    require("../../images/cushion.png")
   ],
   selectedIndex: undefined
 };
